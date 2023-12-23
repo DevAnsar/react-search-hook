@@ -34,15 +34,15 @@ const useSearch = (storeName: string) => {
   }
 
   // Check if the provided store is allowed
-  if (context.search.length > 0 && !context.search.some((s) => s.name === storeName)) {
+  if (context.stores.length > 0 && !context.stores.some((s) => s.name === storeName)) {
     throw new Error(`Invalid store name: ${storeName}`)
   }
 
   const setSearch = (value: string) => {
-    context.changeSearch(storeName, value)
+    context.changeStoreValue(storeName, value)
   }
 
-  const search = context.search?.find((s) => s.name === storeName)?.value
+  const search = context.stores?.find((s) => s.name === storeName)?.value
   return { search, setSearch }
 }
 

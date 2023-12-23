@@ -1,6 +1,6 @@
 {
   "name": "react-search-hook",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Search Library for React",
   "keywords": [
     "react",
@@ -18,7 +18,9 @@
     "src": "src"
   },
   "files": [
-    "src"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "repository": {
     "type": "git",
