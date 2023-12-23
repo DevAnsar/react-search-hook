@@ -18,7 +18,28 @@
  * limitations under the License.
  */
 
-import SearchProvider from './SearchProvider'
-import useSearch from './hooks/useSearch'
+/**
+ * Context values type
+ */
+export type SearchContextType = {
+  stores: StoreData[]
+  changeStoreValue: (storeName: string, value: string) => void
+}
 
-export { SearchProvider, useSearch }
+/**
+ * Search Provider Props
+ */
+export interface SearchProviderProps {
+  children: React.ReactNode
+  stores: string[]
+}
+
+export type InferStoreNames<T extends string[]> = T[number]
+
+/*
+ * Store type
+ */
+export interface StoreData<T = string> {
+  name: T
+  value: string
+}

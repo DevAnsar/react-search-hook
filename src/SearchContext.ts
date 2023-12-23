@@ -18,7 +18,8 @@
  * limitations under the License.
  */
 
-import SearchProvider from './SearchProvider'
-import useSearch from './hooks/useSearch'
+import * as React from 'react'
+import { SearchContextType } from './types'
 
-export { SearchProvider, useSearch }
+export const SearchContext = React.createContext<SearchContextType | null>(null)
+export default SearchContext
