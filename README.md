@@ -1,7 +1,7 @@
 <p align="center">
   
 <a href="https://codecov.io/gh/react-search-hook">
-  <img src="https://codecov.io/gh/react-search-hook/branch/master/graph/badge.svg?token=H188T7PXLL"/>
+  <img src="https://codecov.io/gh/react-search-hook/branch/main/graph/badge.svg?token=H188T7PXLL"/>
 </a>
 <a href="https://www.npmjs.com/package/react-search-hook">
     <img src="https://img.shields.io/npm/v/react-search-hook.svg?logo=npm" alt="Test Suites">
