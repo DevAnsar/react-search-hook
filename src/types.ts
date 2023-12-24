@@ -22,7 +22,7 @@
  * Context values type
  */
 export type SearchContextType = {
-  stores: StoreData[]
+  stores: Record<string, string>
   changeStoreValue: (storeName: string, value: string) => void
 }
 
@@ -35,11 +35,3 @@ export interface SearchProviderProps {
 }
 
 export type InferStoreNames<T extends string[]> = T[number]
-
-/*
- * Store type
- */
-export interface StoreData<T = string> {
-  name: T
-  value: string
-}

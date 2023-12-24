@@ -29,20 +29,23 @@ import SearchContext from '../SearchContext'
  */
 const useSearch = (storeName: string) => {
   const context = React.useContext(SearchContext)
-  if (context === null) {
+  if (!context) {
     throw new Error('Search Provider is missing.')
   }
 
   // Check if the provided store is allowed
-  if (context.stores.length > 0 && !context.stores.some((s) => s.name === storeName)) {
+  if (context.stores && context.stores[storeName] === undefined) {
     throw new Error(`Invalid store name: ${storeName}`)
   }
 
-  const setSearch = (value: string) => {
-    context.changeStoreValue(storeName, value)
-  }
+  const setSearch = React.useCallback(
+    (value: string) => {
+      context.changeStoreValue(storeName, value)
+    },
+    [context, storeName],
+  )
 
-  const search = context.stores?.find((s) => s.name === storeName)?.value
+  const search = context.stores ? context.stores[storeName] : ''
   return { search, setSearch }
 }
 

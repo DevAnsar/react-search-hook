@@ -20,7 +20,7 @@
 
 import * as React from 'react'
 import SearchContext from './SearchContext'
-import { InferStoreNames, SearchProviderProps, StoreData } from './types'
+import { InferStoreNames, SearchProviderProps } from './types'
 
 /**
  * SearchProvider - The Search Context Provider
@@ -33,35 +33,33 @@ import { InferStoreNames, SearchProviderProps, StoreData } from './types'
 const SearchProvider: React.FunctionComponent<SearchProviderProps> = ({ children, stores }) => {
   type StoreNames = InferStoreNames<typeof stores>
 
-  const [storesState, setStoresState] = React.useState<StoreData<StoreNames>[]>([])
-
-  //
-  React.useEffect(() => {
-    const initStateDate: StoreData<StoreNames>[] = stores.map((store) => ({
-      name: store,
-      value: '',
-    }))
-    setStoresState(initStateDate)
-  }, [stores])
-
-  const changeSearch = (storeName: StoreNames, value: string) => {
-    setStoresState(
-      (prevStores) =>
-        prevStores?.map((prevStore) => {
-          if (prevStore.name === storeName) {
-            return { name: prevStore.name, value }
-          } else {
-            return prevStore
-          }
-        }),
+  const initialState = React.useMemo(() => {
+    return stores.reduce(
+      (acc, store) => {
+        acc[store] = ''
+        return acc
+      },
+      {} as Record<StoreNames, string>,
     )
-  }
+  }, [stores])
+  const [storesState, setStoresState] = React.useState<Record<StoreNames, string>>(initialState)
 
-  return (
-    <SearchContext.Provider value={{ stores: storesState, changeStoreValue: changeSearch }}>
-      {children}
-    </SearchContext.Provider>
+  const changeSearch = React.useCallback((storeName: StoreNames, value: string) => {
+    setStoresState((prevStores) => ({
+      ...prevStores,
+      [storeName]: value,
+    }))
+  }, [])
+
+  const contextValue = React.useMemo(
+    () => ({
+      stores: storesState,
+      changeStoreValue: changeSearch,
+    }),
+    [storesState, changeSearch],
   )
+
+  return <SearchContext.Provider value={contextValue}>{children}</SearchContext.Provider>
 }
 
 export default SearchProvider
