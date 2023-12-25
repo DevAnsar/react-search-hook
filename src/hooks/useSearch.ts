@@ -20,15 +20,23 @@
 
 import * as React from 'react'
 import SearchContext from '../SearchContext'
+import { getfilterItems } from '../utils/filter'
+import { UseSearchOptions, UseSearchResponse } from '../types'
 
 /**
- *@function
- *@name useSearch
- *@description A hook to access the search store
- *@returns - Search function
+ * @function
+ * @name useSearch
+ * @description A hook to interact with the search store.
+ * @param {string} storeName - The name of the search store.
+ * @param {UseSearchOptions<TItem>} options - Optional configuration options.
+ * @returns {UseSearchResponse<TItem>} An object containing search-related properties and functions.
  */
-const useSearch = (storeName: string) => {
+const useSearch = <TItem extends any>(
+  storeName: string,
+  options?: UseSearchOptions<TItem>,
+): UseSearchResponse<TItem> => {
   const context = React.useContext(SearchContext)
+
   if (!context) {
     throw new Error('Search Provider is missing.')
   }
@@ -38,6 +46,12 @@ const useSearch = (storeName: string) => {
     throw new Error(`Invalid store name: ${storeName}`)
   }
 
+  /**
+   * Set the search value in the search store.
+   * @function
+   * @name setSearch
+   * @param {string} value - The search value to set.
+   */
   const setSearch = React.useCallback(
     (value: string) => {
       context.changeStoreValue(storeName, value)
@@ -45,8 +59,19 @@ const useSearch = (storeName: string) => {
     [context, storeName],
   )
 
+  // Get the current search value from the search store.
   const search = context.stores ? context.stores[storeName] : ''
-  return { search, setSearch }
+
+  // Initialize an empty array for search results.
+  let searchResult: TItem[] = []
+
+  // If options include items and a search property, filter the items based on the search value.
+  if (options && 'items' in options && options.items) {
+    searchResult = getfilterItems(search, options.items, options.searchProp)
+  }
+
+  // Return an object containing search-related properties and functions.
+  return { search, setSearch, searchResult }
 }
 
 /**

@@ -35,3 +35,28 @@ export interface SearchProviderProps {
 }
 
 export type InferStoreNames<T extends string[]> = T[number]
+
+/*
+ * Store type
+ */
+export interface StoreData<T = string> {
+  name: T
+  value: string
+}
+
+/*
+ * useSearch response type
+ */
+export interface UseSearchResponse<TItem = any> {
+  search: string
+  setSearch: (value: string) => void
+  searchResult: TItem[]
+}
+
+/*
+ * Options type for useSearch hook
+ */
+export interface UseSearchOptions<T = string> {
+  items?: T[]
+  searchProp?: string
+}
