@@ -41,6 +41,14 @@ yarn
 
     yarn add react-search-hook
 
+CDN
+
+- unpkg: https://unpkg.com/react-search-hook@0.1.0/dist/index.umd.js
+
+- jsdelivr: https://cdn.jsdelivr.net/npm/react-search-hook@0.1.0/dist/index.umd.js
+
+<a href="https://www.jsdelivr.com/package/npm/react-search-hook"><img alt="" src="https://data.jsdelivr.com/v1/package/npm/react-search-hook/badge"></a>
+
 ### 2. Add provider to top of your component tree
 
 ```jsx
@@ -60,8 +68,8 @@ function MyExampleComponent() {
   const { search, setSearch } = useSearch('products')
 
   return (
-    <div className='Search-box'>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} />
+    <div>
+      <input onChange={(e) => setSearch(e.target.value)} />
       <span>{search}</span>
     </div>
   )
@@ -69,6 +77,41 @@ function MyExampleComponent() {
 ```
 
 #### notice that `useSearch` needs the store name
+
+### If you need to filter some array of data, simply you can pass items to `useSearch` hook
+
+```jsx
+import { useSearch } from 'react-search-hook'
+function MyExampleComponent() {
+  const items = ['text1', 'text2', ...]
+  const { search, setSearch, searchResult } = useSearch('products', { items })
+
+  return (
+    <div>
+      <input onChange={(e) => setSearch(e.target.value)} />
+      {searchResult.map((item, key) => (
+        <li>{JSON.stringify(item)}</li>
+      ))}
+    </div>
+  )
+}
+```
+
+## APIs
+
+### useSearch(name,options)
+
+| Name    | Type                      | Required | Description                      |
+| ------- | ------------------------- | -------- | -------------------------------- |
+| name    | string                    | yes      | The name of store                |
+| options | object `UseSearchOptions` | no       | Pay attention to the table below |
+
+#### useSearch options\*
+
+| Name       | Type                        | Required                   | Description                                                                |
+| ---------- | --------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| items      | array of strings or objects |                            | The array of strings or objects to be filtered                             |
+| searchProp | string                      | yes if each item is object | If each item is an object, it specifies the desired property of the filter |
 
 ## Contributor ✨
 
