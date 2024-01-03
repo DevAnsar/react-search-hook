@@ -19,11 +19,15 @@
  */
 
 export const getfilterItems = <TItem extends any>(searchText: string, items: TItem[], searchProp?: string): TItem[] => {
-  console.log('i', typeof items[0] === 'object', searchProp)
   if (typeof items[0] === 'string') {
     // If data is an array of strings, filter based on the search term
     return items.filter((item) => (item as string).toLowerCase().includes(searchText.toLowerCase()))
-  } else if (items.length > 0 && typeof items[0] === 'object' && searchProp) {
+  } else if (items.length > 0 && typeof items[0] === 'object') {
+    if (!searchProp)
+      throw new Error(`
+      If the items are an array of objects, searchProp will be a required prop for the search engine!
+      For more information, please refer to: https://github.com/DevAnsar/react-search-hook?tab=readme-ov-file#usesearch-options
+    `)
     // If data is an array of objects, filter based on the specified property
     return items.filter((item) => {
       if (typeof item === 'object' && item !== null && searchProp in item) {

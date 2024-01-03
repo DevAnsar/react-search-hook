@@ -31,7 +31,7 @@ export type SearchContextType = {
  */
 export interface SearchProviderProps {
   children: React.ReactNode
-  stores: string[]
+  stores?: string[]
 }
 
 export type InferStoreNames<T extends string[]> = T[number]

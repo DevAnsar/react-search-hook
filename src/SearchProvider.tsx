@@ -31,9 +31,13 @@ import { InferStoreNames, SearchProviderProps } from './types'
  * @return Functional Component
  */
 const SearchProvider: React.FunctionComponent<SearchProviderProps> = ({ children, stores }) => {
-  type StoreNames = InferStoreNames<typeof stores>
+  type StoreNames = InferStoreNames<typeof stores extends string[] ? typeof stores : string[]>
 
   const initialState = React.useMemo(() => {
+    if (!stores) {
+      return {} as Record<StoreNames, string>
+    }
+
     return stores.reduce(
       (acc, store) => {
         acc[store] = ''
