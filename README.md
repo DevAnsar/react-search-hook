@@ -20,7 +20,9 @@
 
 ## Introduction
 
-**React Search Hook** is a light library for React, with which you can store the search text in the Store and use it in other components.
+**React Search Hook** is a lightweight library for React, with which you can store the search text in the Store and use it in other components.
+
+**Visit online [demo](https://devansar.github.io/react-search-hook/)**
 
 It is production-ready, and gives you the following:
 
