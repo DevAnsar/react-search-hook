@@ -5,6 +5,7 @@ import SearchProvider from '../../SearchProvider'
 import SearchContext from '../../SearchContext'
 import { act } from 'react-dom/test-utils'
 import { SearchContextType, UseSearchOptions } from '../../types'
+import { invalidStoreNameError } from '../../utils/errors'
 
 describe('useSearch', () => {
   it('should thrown an error if the SearchContext is not available', () => {
@@ -20,7 +21,7 @@ describe('useSearch', () => {
       <SearchContext.Provider value={fakeSearchState}>{children}</SearchContext.Provider>
     )
 
-    expect(() => renderHook(() => useSearch('product'), { wrapper })).toThrow(Error(`Invalid store name: product`))
+    expect(() => renderHook(() => useSearch('product'), { wrapper })).toThrow(invalidStoreNameError('product'))
   })
 
   it('should get search value from context with useSearch successfully', () => {
