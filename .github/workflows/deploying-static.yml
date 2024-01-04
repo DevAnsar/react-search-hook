@@ -53,4 +53,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
         with:
-          artifact_dir: docs-dist
+          artifact_name: docs-dist
