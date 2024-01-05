@@ -67,11 +67,11 @@ function App() {
 ```jsx
 import { useSearch } from 'react-search-hook'
 function MyExampleComponent() {
-  const { search, setSearch } = useSearch('products')
+  const { register } = useSearch('products')
 
   return (
     <div>
-      <input onChange={(e) => setSearch(e.target.value)} />
+      <input {...register()} />
       <span>{search}</span>
     </div>
   )
@@ -86,11 +86,11 @@ function MyExampleComponent() {
 import { useSearch } from 'react-search-hook'
 function MyExampleComponent() {
   const items = ['text1', 'text2', ...]
-  const { search, setSearch, searchResult } = useSearch('products', { items })
+  const { register, searchResult } = useSearch('products', { items })
 
   return (
     <div>
-      <input onChange={(e) => setSearch(e.target.value)} />
+      <input {...register()} />
       {searchResult.map((item, key) => (
         <li>{JSON.stringify(item)}</li>
       ))}
@@ -114,6 +114,15 @@ function MyExampleComponent() {
 | ---------- | --------------------------- | -------------------------- | -------------------------------------------------------------------------- |
 | items      | array of strings or objects |                            | The array of strings or objects to be filtered                             |
 | searchProp | string                      | yes if each item is object | If each item is an object, it specifies the desired property of the filter |
+
+#### useSearch responses
+
+| Name         | Type           | Description                                                                                                |
+| ------------ | -------------- | ---------------------------------------------------------------------------------------------------------- |
+| seach        | string         | The current value of the specified store                                                                   |
+| setSearch    | function       | function that updates the specified store                                                                  |
+| register     | function       | This function returns an object with properties required for registering an input                          |
+| searchResult | array of items | If options include items (and a search property for array of objects), items will filter with search value |
 
 ## Contributor ✨
 

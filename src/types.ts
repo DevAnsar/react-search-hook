@@ -50,6 +50,7 @@ export interface StoreData<T = string> {
 export interface UseSearchResponse<TItem = any> {
   search: string
   setSearch: (value: string) => void
+  register: () => {}
   searchResult: TItem[]
 }
 

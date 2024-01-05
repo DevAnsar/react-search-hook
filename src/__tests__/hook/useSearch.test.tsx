@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderHook } from '@testing-library/react'
+import { render, renderHook, screen, fireEvent } from '@testing-library/react'
 import useSearch from '../../hooks/useSearch'
 import SearchProvider from '../../SearchProvider'
 import SearchContext from '../../SearchContext'
@@ -64,6 +64,23 @@ describe('useSearch', () => {
     act(() => {
       result.current.setSearch('product_search_value')
     })
+    expect(result.current.search).toEqual('product_search_value')
+  })
+
+  it('should update search state with register and input', () => {
+    const fakeSearchState = {
+      stores: {},
+      changeStoreValue: jest.fn(),
+    }
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <SearchContext.Provider value={fakeSearchState}>
+        <SearchProvider stores={['product']}>{children}</SearchProvider>
+      </SearchContext.Provider>
+    )
+    const { result } = renderHook(() => useSearch('product'), { wrapper })
+
+    render(<input {...result.current.register()} />)
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'product_search_value' } })
     expect(result.current.search).toEqual('product_search_value')
   })
 

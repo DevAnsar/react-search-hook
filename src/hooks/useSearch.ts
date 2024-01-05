@@ -71,8 +71,13 @@ const useSearch = <TItem extends any>(
     searchResult = getfilterItems(search, options.items, options.searchProp)
   }
 
+  // This function returns an object with properties required for registering an input
+  const register = () => {
+    return { value: search, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value) }
+  }
+
   // Return an object containing search-related properties and functions.
-  return { search, setSearch, searchResult }
+  return { search, setSearch, register, searchResult }
 }
 
 /**
