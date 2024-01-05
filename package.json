@@ -28,8 +28,7 @@
     "url": "git+https://github.com/DevAnsar/react-search-hook.git"
   },
   "scripts": {
-    "build": "run-s build:*",
-    "build:package": "rollup -c",
+    "build": "rollup -c",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
     "test": "jest",

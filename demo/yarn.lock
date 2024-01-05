@@ -1924,10 +1924,10 @@ react-refresh@^0.14.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react-search-hook@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-search-hook/-/react-search-hook-0.2.0.tgz#4d1e612e8e2e3f9d4d4a2c6d3b2e27fbaca92b78"
-  integrity sha512-VDMMvNXENcImBdr/cDQH17+lqMXVhEc2lS19EWmPo4EiipBoiPgSFbZHxHC7h92ZGZBXnCja953cOGTAAtghXw==
+react-search-hook@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-search-hook/-/react-search-hook-0.3.0.tgz#b5188d862256a5160d58ef19166928a668a76615"
+  integrity sha512-UPvJnFVb5auF0ZdNvvpOF7gV1QTVnui8UQwoQXDn3gfpjeGZiH5XC9scaP6msAFHyY+RLnEjFewb/cBNiZTZLA==
 
 react@^18.2.0:
   version "18.2.0"
